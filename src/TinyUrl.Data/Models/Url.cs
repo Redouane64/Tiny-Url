@@ -7,6 +7,7 @@ namespace TinyUrl.Data.Models
     public class Url
     {
         public int Id { get; set; }
+        public long VisitCount { get; set; }
         public string OriginalUrl { get; set; }
         public string ShortUrl { get; set; }
     }
