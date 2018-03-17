@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TinyUrl.Data.Models;
 
 namespace TinyUrl.Data.Repositories
@@ -15,14 +16,32 @@ namespace TinyUrl.Data.Repositories
             this.context = context;
         }
 
-        public Task AddAsync(Url entity)
+        public async Task AddAsync(Url entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await context.AddAsync(entity);
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
-        public Task AddRangeAsync(IEnumerable<Url> entities)
+        public async Task AddRangeAsync(IEnumerable<Url> entities)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await context.AddRangeAsync(entities);
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public Task AddUrlAsync(Url url)
@@ -52,19 +71,43 @@ namespace TinyUrl.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public ValueTask<Url> GetAsync(int id)
+        public async ValueTask<Url> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.FindAsync<Url>(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
-        public ValueTask<Url> GetByOriginalUrlAsync(string url)
+        public async ValueTask<Url> GetByOriginalUrlAsync(string url)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.Urls.FirstOrDefaultAsync(u => u.OriginalUrl.Equals(url, StringComparison.Ordinal));
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
-        public ValueTask<Url> GetByShortUrl(string shortUrl)
+        public async ValueTask<Url> GetByShortUrl(string shortUrl)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await context.Urls.FirstOrDefaultAsync(u => u.OriginalUrl.Equals(shortUrl, StringComparison.Ordinal));
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         public Task UpdateAsync(Url entity)
