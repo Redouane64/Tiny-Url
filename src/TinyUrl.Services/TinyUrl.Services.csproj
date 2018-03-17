@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\submodules\RepositoryBase\src\RepositoryBase\RepositoryBase.csproj" />
+    <ProjectReference Include="..\TinyUrl.Data\TinyUrl.Data.csproj" />
+  </ItemGroup>
+
+</Project>
