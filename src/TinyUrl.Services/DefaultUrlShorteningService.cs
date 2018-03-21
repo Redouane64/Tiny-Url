@@ -9,6 +9,9 @@ using TinyUrl.Data.Repositories;
 
 namespace TinyUrl.Services
 {
+    /// <summary>
+    /// Default URLs shortening service implementation.
+    /// </summary>
     public class DefaultUrlShorteningService : IUrlShorteningService
     {
         const string HttpSchema = "http";
@@ -25,7 +28,7 @@ namespace TinyUrl.Services
             this.repository = repository;
         }
 
-        public async Task<string> GetShortUrl(string url)
+        public async Task<string> CreateShortURL(string url)
         {
             var uri = new Uri(url, UriKind.RelativeOrAbsolute);
 
@@ -37,7 +40,11 @@ namespace TinyUrl.Services
                 var urlHash = SHA1.Create().ComputeHash(urlUtfBytes);
                 var urlBase64String = Convert.ToBase64String(urlHash);
 
-                // TODO: Check in database for same URL using computed hash and return it if available.
+                var shortUrl = await FindShortUrl(urlBase64String);
+                if (shortUrl != null)
+                {
+                    return await Task.FromResult(shortUrl);
+                }
 
                 // Build entity.
                 var suffix = urlBase64String.Take(ShortURLSuffixLength).ToArray();
@@ -49,7 +56,7 @@ namespace TinyUrl.Services
                     ShortUrl = new String(suffix)
                 };
 
-                // TODO: Save to database.
+                await repository.AddAsync(entity);
 
                 return await Task.FromResult(entity.ShortUrl);
             }
@@ -57,6 +64,21 @@ namespace TinyUrl.Services
             return await Task.FromResult(default(string));
         }
 
+        /// <summary>
+        /// Find and retrieve an already shortened URL.
+        /// </summary>
+        /// <param name="urlHash">URL hash.</param>
+        /// <returns>Shortened URL.</returns>
+        private async ValueTask<string> FindShortUrl(string urlHash)
+        {
+            return await repository.GetByHashAsync(urlHash);
+        }
+
+        /// <summary>
+        /// Validate URL schema.
+        /// </summary>
+        /// <param name="scheme">Schema from value.</param>
+        /// <returns>True if schema is valid. False otherwise.</returns>
         private bool IsValidSchema(string scheme)
         {
             if(scheme == null)

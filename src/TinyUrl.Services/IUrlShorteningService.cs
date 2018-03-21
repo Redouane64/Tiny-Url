@@ -5,6 +5,11 @@ namespace TinyUrl.Services
 {
     public interface IUrlShorteningService
     {
-        Task<string> GetShortUrl(string url);
+        /// <summary>
+        /// Create a short URL from a full URL.
+        /// </summary>
+        /// <param name="url">URL to shorten.</param>
+        /// <returns>Short URL.</returns>
+        Task<string> CreateShortURL(string url);
     }
 }

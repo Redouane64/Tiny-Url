@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -44,11 +45,6 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
-        public Task AddUrlAsync(Url url)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task DeleteAsync(Url entity)
         {
             throw new NotImplementedException();
@@ -84,29 +80,18 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
-        public async ValueTask<Url> GetByOriginalUrlAsync(string url)
+        public async ValueTask<string> GetByHashAsync(string urlHash)
         {
             try
             {
-                return await context.Urls.FirstOrDefaultAsync(u => u.OriginalUrl.Equals(url, StringComparison.Ordinal));
+                return await context.Urls.Where(u => u.UrlHash.Equals(urlHash, StringComparison.Ordinal))
+                                         .Select(u => u.ShortUrl)
+                                         .SingleOrDefaultAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
-                throw ex;
-            }
-        }
-
-        public async ValueTask<Url> GetByShortUrl(string shortUrl)
-        {
-            try
-            {
-                return await context.Urls.FirstOrDefaultAsync(u => u.OriginalUrl.Equals(shortUrl, StringComparison.Ordinal));
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
+                throw;
             }
         }
 
