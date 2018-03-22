@@ -17,6 +17,8 @@ namespace TinyUrl.Data.Repositories
             this.context = context;
         }
 
+        public void Dispose() => context.Dispose();
+
         public async Task AddAsync(Url entity)
         {
             try
@@ -55,7 +57,6 @@ namespace TinyUrl.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public void Dispose() => context.Dispose();
 
         public ValueTask<IEnumerable<Url>> FindAsync(Expression<Func<Url, bool>> predicate)
         {
