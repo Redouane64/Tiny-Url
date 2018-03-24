@@ -16,7 +16,7 @@ namespace TinyUrl.Services
     public class DefaultUrlShorteningService : IUrlShorteningService
     {
 
-        const int ShortURLSuffixLength = 6;
+        public const int ShortURLSuffixLength = 6;
 
         private readonly ITinyUrlRepository repository;
 
