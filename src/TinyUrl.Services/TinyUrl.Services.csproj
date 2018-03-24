@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\submodules\RepositoryBase\src\RepositoryBase\RepositoryBase.csproj" />
     <ProjectReference Include="..\TinyUrl.Data\TinyUrl.Data.csproj" />
   </ItemGroup>
 
