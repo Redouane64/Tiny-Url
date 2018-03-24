@@ -28,7 +28,7 @@ namespace TinyUrl.Services.Tests
             var service = new DefaultUrlShorteningService(repository);
             var testUrl = "https://github.com/aspnet/KestrelHttpServer";
 
-            var shortUrl = service.CreateShortURL(testUrl).Result;
+            var shortUrl = service.CreateShortURLAsync(testUrl).Result;
 
             Assert.NotNull(shortUrl);
         }
