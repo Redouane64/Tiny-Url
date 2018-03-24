@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using TinyUrl.Data.Models;
 
 namespace TinyUrl.Services
@@ -10,6 +11,6 @@ namespace TinyUrl.Services
         /// </summary>
         /// <param name="url">URL to shorten.</param>
         /// <returns>Short URL.</returns>
-        Task<string> CreateShortURL(string url);
+        Task<string> CreateShortURL(string url, CancellationToken cancellationToken = default);
     }
 }
