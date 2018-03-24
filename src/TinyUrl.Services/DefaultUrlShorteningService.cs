@@ -26,7 +26,7 @@ namespace TinyUrl.Services
             this.repository = repository;
         }
 
-        public async Task<string> CreateShortURL(
+        public async Task<string> CreateShortURLAsync(
             string url, 
             CancellationToken cancellationToken = default)
         {
