@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TinyUrl.Data.Models;
 
 namespace TinyUrl.Data.Repositories
 {
-    public class TinyUrlsRepository : IUrlsRepository, IDisposable
+    public class TinyUrlsRepository : ITinyUrlRepository, IDisposable
     {
         private readonly TinyUrlContext context;
 
@@ -19,12 +20,14 @@ namespace TinyUrl.Data.Repositories
 
         public void Dispose() => context.Dispose();
 
-        public async Task AddAsync(Url entity)
+        public async Task AddAsync(
+            Url entity, 
+            CancellationToken cancellationToken = default)
         {
             try
             {
-                await context.AddAsync(entity);
-                await context.SaveChangesAsync();
+                await context.AddAsync(entity, cancellationToken);
+                await context.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {
@@ -33,12 +36,19 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
-        public async Task AddRangeAsync(IEnumerable<Url> entities)
+        public async Task DeleteAsync(
+            Expression<Func<Url, bool>> predicate, 
+            CancellationToken cancellationToken = default)
         {
             try
             {
-                await context.AddRangeAsync(entities);
-                await context.SaveChangesAsync();
+                var entity = await context.Urls.FirstOrDefaultAsync(predicate, cancellationToken);
+
+                if(entity != null)
+                {
+                    context.Remove(entity);
+                    await context.SaveChangesAsync(cancellationToken);
+                }
             }
             catch (Exception ex)
             {
@@ -47,32 +57,20 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
-        public Task DeleteAsync(Url entity)
+        public async Task<IEnumerable<Url>> FindAsync(
+            Expression<Func<Url, bool>> predicate,
+            CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await context.Urls.Where(predicate).ToListAsync();
         }
 
-        public Task DeleteRangeAsync(IEnumerable<Url> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public ValueTask<IEnumerable<Url>> FindAsync(Expression<Func<Url, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ValueTask<IEnumerable<Url>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async ValueTask<Url> GetAsync(int id)
+        public async Task<Url> GetAsync(
+            Expression<Func<Url, bool>> predicate,
+            CancellationToken cancellationToken = default)
         {
             try
             {
-                return await context.FindAsync<Url>(id);
+                return await context.Urls.FirstOrDefaultAsync(predicate);
             }
             catch (Exception ex)
             {
@@ -81,11 +79,13 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
-        public async ValueTask<string> GetByHashAsync(string urlHash)
+        public async ValueTask<string> GetByHashAsync(
+            string hash,
+            CancellationToken cancellationToken = default)
         {
             try
             {
-                return await context.Urls.Where(u => u.UrlHash.Equals(urlHash, StringComparison.Ordinal))
+                return await context.Urls.Where(u => u.UrlHash.Equals(hash, StringComparison.Ordinal))
                                          .Select(u => u.ShortUrl)
                                          .SingleOrDefaultAsync();
             }
@@ -96,9 +96,5 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
-        public Task UpdateAsync(Url entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
