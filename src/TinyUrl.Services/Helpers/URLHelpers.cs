@@ -14,8 +14,8 @@ namespace TinyUrl.Services.Helpers
         public static bool IsValidURL(string url)
         {
             if (Uri.TryCreate(url, UriKind.Absolute, out var result)
-                && result.Scheme == Uri.UriSchemeHttp
-                && result.Scheme == Uri.UriSchemeHttps)
+                && (result.Scheme == Uri.UriSchemeHttp
+                || result.Scheme == Uri.UriSchemeHttps))
             {
                 return true;
             }
