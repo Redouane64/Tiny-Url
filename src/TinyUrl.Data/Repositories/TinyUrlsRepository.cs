@@ -96,5 +96,22 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
+        public async ValueTask<string> GetByShortHash(
+            string hash, 
+            CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await context.Urls.Where(
+                    u => u.UrlHash.StartsWith(hash, StringComparison.Ordinal))
+                                         .Select(u => u.ShortUrl)
+                                         .SingleOrDefaultAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
