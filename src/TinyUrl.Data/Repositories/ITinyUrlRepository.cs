@@ -6,6 +6,6 @@ namespace TinyUrl.Data.Repositories
 {
     public interface ITinyUrlRepository : IRepository<int, Url>
     {
-        ValueTask<string> GetByHashAsync(string hash, CancellationToken cancellationToken);
+        ValueTask<string> GetByHashAsync(string hash, CancellationToken cancellationToken = default);
     }
 }
