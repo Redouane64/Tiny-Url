@@ -9,6 +9,9 @@ namespace TinyUrl.Web.Pages
 {
     public class IndexModel : PageModel
     {
+        [FromBody]
+        public URLViewModel Model { get; set; }
+
         public void OnGet()
         {
 

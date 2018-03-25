@@ -17,19 +17,9 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a asp-page="/Index" class="navbar-brand">Tiny Url</a>
-            </div>
-        </div>
-    </nav>
+
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.UtcNow.Year - TinyUrl</p>
-        </footer>
     </div>
 
     <environment include="Development">
