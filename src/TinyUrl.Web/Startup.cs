@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TinyUrl.Data;
+using TinyUrl.Data.Repositories;
+using TinyUrl.Services;
+using TinyUrl.Web.Services;
 
 namespace TinyUrl.Web
 {
@@ -28,6 +31,10 @@ namespace TinyUrl.Web
                 options.UseNpgsql(Configuration.GetConnectionString("database"));
             });
             services.AddMvc();
+
+            services.AddScoped<ITinyUrlRepository, TinyUrlsRepository>();
+            services.AddScoped<IUrlShorteningService, DefaultUrlShorteningService>();
+            services.AddTransient<IShortURLBuilder, DefaultShortURLBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
