@@ -85,7 +85,7 @@ namespace TinyUrl.Data.Repositories
         {
             try
             {
-                return await context.Urls.Where(u => u.UrlHash.Equals(hash, StringComparison.Ordinal))
+                return await context.Urls.Where(u => u.UrlHash == hash)
                                          .Select(u => u.ShortUrl)
                                          .SingleOrDefaultAsync();
             }
@@ -103,7 +103,7 @@ namespace TinyUrl.Data.Repositories
             try
             {
                 return await context.Urls.Where(
-                    u => u.UrlHash.StartsWith(hash, StringComparison.Ordinal))
+                    u => EF.Functions.Like(u.UrlHash, $"{hash}%"))
                                          .Select(u => u.ShortUrl)
                                          .SingleOrDefaultAsync();
             }
