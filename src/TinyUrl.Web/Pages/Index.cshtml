@@ -14,8 +14,8 @@
                     <legend>URL Shortening Service for FREE!</legend>
 
                     <div class="form-group">
-                        <label asp-for="Model.URL">URL</label>
-                        <input class="form-control" asp-for="Model.URL" placeholder="Paste Your URL here..." type="url">
+                        <label asp-for="URL">URL</label>
+                        <input class="form-control" name="url" asp-for="URL" placeholder="Paste Your URL here..." type="url">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Shorten</button>
@@ -24,8 +24,8 @@
         </div>
         <div class="form-group">
             <fieldset>
-                <label class="control-label" for="readOnlyInput">Short URL</label>
-                <input class="form-control" id="readOnlyInput" placeholder="Short URL will appear here..." readonly="" type="text">
+                <label asp-for="ShortURL" class="control-label" for="readOnlyInput">Short URL</label>
+                <input asp-for="ShortURL" class="form-control" id="readOnlyInput" placeholder="Short URL will appear here..." readonly="" type="text">
             </fieldset>
         </div>
         <button type="button" class="btn btn-success">Copy</button>

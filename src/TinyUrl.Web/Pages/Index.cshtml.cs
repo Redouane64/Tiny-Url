@@ -9,8 +9,11 @@ namespace TinyUrl.Web.Pages
 {
     public class IndexModel : PageModel
     {
-        [FromBody]
-        public URLViewModel Model { get; set; }
+        [BindProperty(Name = "url")]
+        public string URL { get; set; }
+
+        [TempData]
+        public string ShortURL { get; set; }
 
         public void OnGet()
         {
