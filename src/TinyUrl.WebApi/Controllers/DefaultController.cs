@@ -36,7 +36,7 @@ namespace TinyUrl.WebApi.Controllers
             }
 
             // Get URL.
-            var url = await repository.GetByShortHash(hash, cancellationToken);
+            var url = await repository.GetURLByShortHash(hash, cancellationToken);
 
             if (String.IsNullOrEmpty(url))
             {
@@ -45,7 +45,7 @@ namespace TinyUrl.WebApi.Controllers
 
             // TODO: Increament visit count
 
-            return Redirect(url);
+            return RedirectPermanent(url);
         }
     }
 }

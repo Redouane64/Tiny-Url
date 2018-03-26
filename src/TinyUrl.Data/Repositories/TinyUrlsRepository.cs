@@ -96,7 +96,7 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
-        public async ValueTask<string> GetByShortHash(
+        public async ValueTask<string> GetURLByShortHash(
             string hash, 
             CancellationToken cancellationToken = default)
         {
@@ -104,7 +104,7 @@ namespace TinyUrl.Data.Repositories
             {
                 return await context.Urls.Where(
                     u => EF.Functions.Like(u.UrlHash, $"{hash}%"))
-                                         .Select(u => u.ShortUrl)
+                                         .Select(u => u.OriginalUrl)
                                          .SingleOrDefaultAsync();
             }
             catch (Exception)

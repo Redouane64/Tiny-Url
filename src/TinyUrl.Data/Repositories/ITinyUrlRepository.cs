@@ -20,6 +20,6 @@ namespace TinyUrl.Data.Repositories
         /// <param name="hash">Short hash value.</param>
         /// <param name="cancellationToken">Task cancellation token.</param>
         /// <returns>URL that corresponds to the given hash otherwise null.</returns>
-        ValueTask<string> GetByShortHash(string hash, CancellationToken cancellationToken = default);
+        ValueTask<string> GetURLByShortHash(string hash, CancellationToken cancellationToken = default);
     }
 }
