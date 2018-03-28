@@ -16,7 +16,7 @@ namespace TinyUrl.Web.Pages
         private readonly IShortURLBuilder shortURLBuilder;
 
         public IndexModel(
-            IUrlShorteningService shorteningService,
+            IUrlShorteningService shorteningService
             /*IShortURLBuilder shortURLBuilder*/)
         {
             this.shorteningService = shorteningService;
