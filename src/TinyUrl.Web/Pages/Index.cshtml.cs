@@ -37,7 +37,7 @@ namespace TinyUrl.Web.Pages
         {
             // Shorten URL.
             var hash = await shorteningService.CreateShortURLAsync(URL);
-            ShortURL = shortURLBuilder.CreateShortURLFromHash(hash);
+            ShortURL = $"{Uri.UriSchemeHttp}://{HttpContext.Request.Host}/{hash}"; //shortURLBuilder.CreateShortURLFromHash(hash);
         }
     }
 }
