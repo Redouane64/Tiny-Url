@@ -9,6 +9,7 @@ namespace TinyUrl.Data
         public TinyUrlContext(DbContextOptions<TinyUrlContext> options)
             : base(options)
         {
+            Database.Migrate(); // Apply migrations if needed.
         }
 
         public DbSet<Url> Urls { get; set; }
