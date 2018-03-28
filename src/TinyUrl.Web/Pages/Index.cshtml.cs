@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TinyUrl.Data.Repositories;
 using TinyUrl.Services;
 using TinyUrl.Web.Services;
 
@@ -13,13 +14,16 @@ namespace TinyUrl.Web.Pages
     {
 
         private readonly IUrlShorteningService shorteningService;
+        private readonly ITinyUrlRepository repository;
         private readonly IShortURLBuilder shortURLBuilder;
 
         public IndexModel(
-            IUrlShorteningService shorteningService
+            IUrlShorteningService shorteningService,
+            ITinyUrlRepository repository
             /*IShortURLBuilder shortURLBuilder*/)
         {
             this.shorteningService = shorteningService;
+            this.repository = repository;
             //this.shortURLBuilder = shortURLBuilder;
             this.shortURLBuilder = new DefaultShortURLBuilder(HttpContext);
         }
@@ -29,8 +33,22 @@ namespace TinyUrl.Web.Pages
 
         public string ShortURL { get; set; }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet([FromRoute]string hash)
         {
+            if (!String.IsNullOrEmpty(hash))
+            {
+                var url = await repository.GetURLByShortHash(hash);
+                if(url != null)
+                {
+                    return RedirectPermanent(url);
+                }
+                else
+                {
+                    return RedirectToPage("NotFound");
+                }
+            }
+
+            return Page();
         }
 
         public async Task OnPostAsync()

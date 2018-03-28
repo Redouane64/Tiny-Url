@@ -1,34 +1,20 @@
-﻿@page
+﻿@page "{hash?}"
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Redouane's Free URL shortening!";
 }
 
-<div class="row">
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-6">
-        <div class="form-group">    
-            <form method="post" target="_self">
-                <fieldset>
-                    <legend>URL Shortening Service for FREE!</legend>
-
-                    <div class="form-group">
-                        <label asp-for="URL">URL</label>
-                        <input class="form-control" name="url" asp-for="URL" placeholder="Paste Your URL here..." type="url">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Shorten</button>
-                </fieldset>
-            </form>
-        </div>
-        <div class="form-group">
-            <fieldset>
-                <label asp-for="ShortURL" class="control-label" for="readOnlyInput">Short URL</label>
-                <input asp-for="ShortURL" class="form-control" id="readOnlyInput" placeholder="Short URL will appear here..." readonly="" type="text">
-            </fieldset>
-        </div>
-    </div>
-    <div class="col-md-3">
-    </div>
+<h1 class="mt-5 text-center">Free short URL!</h1>
+<br />
+<div class="form-group">
+    <form method="post" target="_self">
+        <fieldset>
+            <div class="input-group">
+                <input class="form-control input-lg" name="url" asp-for="URL" required placeholder="Paste Your URL here..." type="url">
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-lg" type="submit">Go!</button>
+                </span>
+            </div>
+        </fieldset>
+    </form>
 </div>

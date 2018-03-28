@@ -13,4 +13,7 @@
     <ProjectReference Include="..\TinyUrl.Data\TinyUrl.Data.csproj" />
     <ProjectReference Include="..\TinyUrl.Services\TinyUrl.Services.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
 </Project>
