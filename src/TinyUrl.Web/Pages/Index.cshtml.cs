@@ -20,7 +20,8 @@ namespace TinyUrl.Web.Pages
             IShortURLBuilder shortURLBuilder)
         {
             this.shorteningService = shorteningService;
-            this.shortURLBuilder = shortURLBuilder;
+            //this.shortURLBuilder = shortURLBuilder;
+            this.shortURLBuilder = new DefaultShortURLBuilder(HttpContext);
         }
 
         [BindProperty(Name = "url")]

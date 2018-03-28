@@ -20,6 +20,11 @@ namespace TinyUrl.Web.Services
             context = httpContextAccessor.HttpContext;
         }
 
+        public DefaultShortURLBuilder(HttpContext context)
+        {
+            this.context = context;
+        }
+
         public string CreateShortURLFromHash(string hash) => $"{Uri.UriSchemeHttp}://{context.Request.Host}/{hash}";
     }
 }
