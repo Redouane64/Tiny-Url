@@ -15,17 +15,13 @@ namespace TinyUrl.Web.Pages
 
         private readonly IUrlShorteningService shorteningService;
         private readonly ITinyUrlRepository repository;
-        private readonly IShortURLBuilder shortURLBuilder;
 
         public IndexModel(
             IUrlShorteningService shorteningService,
-            ITinyUrlRepository repository
-            /*IShortURLBuilder shortURLBuilder*/)
+            ITinyUrlRepository repository)
         {
             this.shorteningService = shorteningService;
             this.repository = repository;
-            //this.shortURLBuilder = shortURLBuilder;
-            this.shortURLBuilder = new DefaultShortURLBuilder(HttpContext);
         }
 
         [BindProperty(Name = "url")]
@@ -55,7 +51,7 @@ namespace TinyUrl.Web.Pages
         {
             // Shorten URL.
             var hash = await shorteningService.CreateShortURLAsync(URL);
-            ShortURL = $"{Uri.UriSchemeHttp}://{HttpContext.Request.Host}/{hash}"; //shortURLBuilder.CreateShortURLFromHash(hash);
+            ShortURL = $"{Uri.UriSchemeHttp}://{HttpContext.Request.Host}/{hash}";
 
             return RedirectToPagePermanent("ShortURL", nameof(ShortURLModel.OnGet), new { shortURL = ShortURL });
         }
