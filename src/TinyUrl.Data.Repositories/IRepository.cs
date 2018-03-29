@@ -8,9 +8,9 @@ namespace TinyUrl.Data.Repositories
 {
     public interface IRepository<TKey, TEntity> where TEntity : class
     {
-        Task AddAsync(TEntity entity, CancellationToken cancellationToken = default);
-        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
-        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
-        Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
+        Task AddAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken));
+        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken));
+        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken));
+        Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

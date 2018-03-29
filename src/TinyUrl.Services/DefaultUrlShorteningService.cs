@@ -28,7 +28,7 @@ namespace TinyUrl.Services
 
         public async Task<string> CreateShortURLAsync(
             string url, 
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default(CancellationToken))
         {
 
             // Validate URL schema.

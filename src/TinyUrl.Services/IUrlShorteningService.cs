@@ -11,6 +11,6 @@ namespace TinyUrl.Services
         /// </summary>
         /// <param name="url">URL to shorten.</param>
         /// <returns>Short URL.</returns>
-        Task<string> CreateShortURLAsync(string url, CancellationToken cancellationToken = default);
+        Task<string> CreateShortURLAsync(string url, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

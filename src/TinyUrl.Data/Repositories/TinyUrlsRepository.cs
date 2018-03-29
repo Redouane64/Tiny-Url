@@ -22,7 +22,7 @@ namespace TinyUrl.Data.Repositories
 
         public async Task AddAsync(
             Url entity, 
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             try
             {
@@ -38,7 +38,7 @@ namespace TinyUrl.Data.Repositories
 
         public async Task DeleteAsync(
             Expression<Func<Url, bool>> predicate, 
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             try
             {
@@ -59,14 +59,14 @@ namespace TinyUrl.Data.Repositories
 
         public async Task<IEnumerable<Url>> FindAsync(
             Expression<Func<Url, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             return await context.Urls.Where(predicate).ToListAsync();
         }
 
         public async Task<Url> GetAsync(
             Expression<Func<Url, bool>> predicate,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             try
             {
@@ -81,7 +81,7 @@ namespace TinyUrl.Data.Repositories
 
         public async ValueTask<string> GetByHashAsync(
             string hash,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             try
             {
@@ -98,7 +98,7 @@ namespace TinyUrl.Data.Repositories
 
         public async ValueTask<string> GetURLByShortHash(
             string hash, 
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default(CancellationToken))
         {
             try
             {
