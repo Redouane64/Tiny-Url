@@ -1,0 +1,16 @@
+﻿@page
+@model ShortURLModel
+@{
+    ViewData["Title"] = "Thank you! | Your short URL is here.";
+}
+
+<h1 class="mt-5 text-center">
+    Your short link is here!
+</h1>
+<br />
+<div class="input-group">
+    <input class="form-control input-lg" id="url" name="url" asp-for="@Model.ShortURL" readonly type="url">
+    <span class="input-group-btn">
+        <button class="btn btn-success btn-lg" type="button" onclick="copyText()">Copy</button>
+    </span>
+</div>

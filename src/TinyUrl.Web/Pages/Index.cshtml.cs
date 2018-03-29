@@ -51,11 +51,13 @@ namespace TinyUrl.Web.Pages
             return Page();
         }
 
-        public async Task OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             // Shorten URL.
             var hash = await shorteningService.CreateShortURLAsync(URL);
             ShortURL = $"{Uri.UriSchemeHttp}://{HttpContext.Request.Host}/{hash}"; //shortURLBuilder.CreateShortURLFromHash(hash);
+
+            return RedirectToPagePermanent("ShortURL", nameof(ShortURLModel.OnGet), new { shortURL = ShortURL });
         }
     }
 }
