@@ -34,7 +34,7 @@ namespace TinyUrl.Web
 
             services.AddScoped<ITinyUrlRepository, TinyUrlsRepository>();
             services.AddScoped<IUrlShorteningService, DefaultUrlShorteningService>();
-            //services.AddTransient<IShortURLBuilder, DefaultShortURLBuilder>();
+            services.AddTransient<IShortURLBuilder, DefaultShortURLBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
