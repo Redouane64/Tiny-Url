@@ -11,15 +11,15 @@ using TinyUrl.Data;
 namespace TinyUrl.Data.Migrations
 {
     [DbContext(typeof(TinyUrlContext))]
-    [Migration("20180322181743_FirstMigration")]
+    [Migration("20180329213551_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("TinyUrl.Data.Models.Url", b =>
                 {

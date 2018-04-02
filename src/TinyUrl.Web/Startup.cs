@@ -28,7 +28,7 @@ namespace TinyUrl.Web
         {
             services.AddDbContextPool<TinyUrlContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("database"));
+                options.UseSqlServer(Configuration.GetConnectionString("database"));
             });
             services.AddMvc();
 

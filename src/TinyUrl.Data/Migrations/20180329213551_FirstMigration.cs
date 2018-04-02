@@ -14,7 +14,7 @@ namespace TinyUrl.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OriginalUrl = table.Column<string>(nullable: true),
                     ShortUrl = table.Column<string>(nullable: true),
                     UrlHash = table.Column<string>(nullable: true),
