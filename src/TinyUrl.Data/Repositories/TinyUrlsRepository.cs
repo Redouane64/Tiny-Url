@@ -79,7 +79,7 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
-        public async ValueTask<string> GetByHashAsync(
+        public async Task<string> GetByHashAsync(
             string hash,
             CancellationToken cancellationToken = default)
         {
@@ -96,7 +96,7 @@ namespace TinyUrl.Data.Repositories
             }
         }
 
-        public async ValueTask<string> GetURLByShortHash(
+        public async Task<string> GetURLByShortHash(
             string hash, 
             CancellationToken cancellationToken = default)
         {
