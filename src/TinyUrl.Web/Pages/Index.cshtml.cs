@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TinyUrl.Data.Repositories;
 using TinyUrl.Services;
-using TinyUrl.Web.Services;
 
 namespace TinyUrl.Web.Pages
 {

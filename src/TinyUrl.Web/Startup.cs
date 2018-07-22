@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using TinyUrl.Data;
 using TinyUrl.Data.Repositories;
 using TinyUrl.Services;
-using TinyUrl.Web.Services;
 
 namespace TinyUrl.Web
 {
@@ -34,7 +29,6 @@ namespace TinyUrl.Web
 
             services.AddScoped<ITinyUrlRepository, TinyUrlsRepository>();
             services.AddScoped<IUrlShorteningService, DefaultUrlShorteningService>();
-            //services.AddTransient<IShortURLBuilder, DefaultShortURLBuilder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
